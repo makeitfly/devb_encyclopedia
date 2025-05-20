@@ -46,7 +46,7 @@ class ContentTypeLabel extends ProcessorPluginBase implements BuildProcessorInte
     string $plugin_id,
     $plugin_definition,
     protected LanguageManagerInterface $languageManager,
-    protected EntityTypeManagerInterface $entityTypeManager
+    protected EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }

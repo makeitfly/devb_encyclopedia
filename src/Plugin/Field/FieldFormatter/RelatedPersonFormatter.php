@@ -36,7 +36,7 @@ class RelatedPersonFormatter extends EntityReferenceLabelFormatter {
       else {
         $qualification = $values[$delta]['qualification'];
         if ($qualification) {
-          $elements[$delta]['#prefix'] = $this->t("(is @qualification van) ", ['@qualification' => $qualification]);
+          $elements[$delta]['#prefix'] = $this->t("(is @qualification van)", ['@qualification' => $qualification]) . ' ';
         }
       }
     }

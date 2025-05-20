@@ -8,7 +8,6 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataReferenceTargetDefinition;
-use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 
 /**
  * Field to reference entities in a qualified way.
