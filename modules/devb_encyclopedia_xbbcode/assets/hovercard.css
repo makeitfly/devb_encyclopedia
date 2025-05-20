@@ -1,0 +1,10 @@
+[data-hover-blurb] {
+  display: none;
+}
+
+[data-hover-label] {
+  font-weight: bold;
+  border-bottom: 1px dotted #000;
+  text-decoration: none;
+  cursor: pointer;
+}

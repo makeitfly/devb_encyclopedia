@@ -1,0 +1,97 @@
+<?php
+
+/**
+ * @file
+ * Provides custom logic for DEVB encyclopedia items.
+ */
+
+use Drupal\Core\Entity\Display\EntityFormDisplayInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\devb_encyclopedia\Hook\EntityHooks;
+use Drupal\devb_encyclopedia\Hook\ThemeHooks;
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function devb_encyclopedia_theme(): array {
+  return \Drupal::service(ThemeHooks::class)->theme();
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+#[LegacyHook]
+function devb_encyclopedia_entity_extra_field_info(): array {
+  return \Drupal::service(EntityHooks::class)->entityExtraFieldInfo();
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+#[LegacyHook]
+function devb_encyclopedia_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode): void {
+  \Drupal::service(EntityHooks::class)->entityView($build, $entity, $display, $view_mode);
+}
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+#[LegacyHook]
+function devb_encyclopedia_entity_bundle_info_alter(array &$bundles): void {
+  \Drupal::service(EntityHooks::class)->entityBundleInfoAlter($bundles);
+}
+
+/**
+ * Implements hook_entity_view_mode_alter().
+ */
+#[LegacyHook]
+function devb_encyclopedia_entity_view_mode_alter(&$view_mode, EntityInterface $entity): void {
+  \Drupal::service(EntityHooks::class)->entityViewModeAlter($view_mode, $entity);
+}
+
+/**
+ * Implements hook_entity_form_display_alter().
+ */
+#[LegacyHook]
+function devb_encyclopedia_entity_form_display_alter(EntityFormDisplayInterface $form_display, array $context): void {
+  \Drupal::service(EntityHooks::class)->entityFormDisplayAlter($form_display, $context);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for search_api_excerpt.
+ */
+function devb_encyclopedia_preprocess_search_api_excerpt(&$variables): void {
+  $variables['excerpt']['#markup'] = devb_encyclopedia_strip_excerpt($variables['excerpt']['#markup']);
+}
+
+/**
+ * Implements hook_preprocess() for node.
+ *
+ * Remove the summary field from the search result view mode if the excerpt
+ * is available. Also strip BBCode from the excerpt.
+ */
+function devb_encyclopedia_preprocess_node(&$variables, $hook): void {
+  if (isset($variables['content']['search_api_excerpt'])
+    && str_contains($variables['view_mode'], 'search_result')) {
+    unset($variables['content']['field_summary']);
+  }
+}
+
+/**
+ * Removes BBCode from a string.
+ *
+ * @param string $text_to_search
+ *   The string to remove BBCode from.
+ *
+ * @return string
+ *   The string with BBCode removed.
+ */
+function devb_encyclopedia_strip_excerpt(string $text_to_search): string {
+  $text_to_search = strip_tags($text_to_search, '<strong>');
+  $pattern = '|[[\\/\\!]*?[^\\[\\]]*?]|';
+  $replace = '';
+  return preg_replace($pattern, $replace, $text_to_search);
+}

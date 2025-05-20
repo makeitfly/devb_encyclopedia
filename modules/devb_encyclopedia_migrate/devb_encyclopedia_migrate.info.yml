@@ -1,0 +1,11 @@
+name: DEVB Encyclopedia - Migrations
+type: module
+description: 'Provides migration / syncing logic for DEVB encyclopedia items'
+package: DEVB
+core_version_requirement: ^9 || ^10
+dependencies:
+  - devb_encyclopedia:devb_encyclopedia
+  - drupal:migrate
+  - key:key
+  - migrate_plus:migrate_plus
+  - symfony_mailer:symfony_mailer

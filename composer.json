@@ -1,0 +1,15 @@
+{
+    "name": "makeitfly/devb_encyclopedia",
+    "type": "drupal-module",
+    "description": "Provides custom logic for ADVN DEVB encyclopedia",
+    "keywords": ["Drupal", "Make it fly"],
+    "authors": [
+        {
+            "name": "Sven Decabooter",
+            "email": "sven.decabooter@makeitfly.group"
+        }
+    ],
+    "require": {
+        "drupal/core": "^10.3 || ^11"
+    }
+}

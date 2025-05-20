@@ -1,0 +1,17 @@
+devb_encyclopedia.encyclopedia_bundle_filter:
+  class: Drupal\devb_encyclopedia\Plugin\Menu\EncyclopediaMenuLink
+  deriver: Drupal\devb_encyclopedia\Plugin\Derivative\EncyclopediaBundleMenuLink
+  menu_name: main
+  parent: 'views_view:views.encyclopedia_overview.page_search_overview'
+
+devb_encyclopedia.encyclopedia_theme_overview:
+  title: 'Themes'
+  route_name: '<nolink>'
+  menu_name: main
+  weight: 2
+
+devb_encyclopedia.encyclopedia_theme_filter:
+  class: Drupal\devb_encyclopedia\Plugin\Menu\EncyclopediaMenuLink
+  deriver: Drupal\devb_encyclopedia\Plugin\Derivative\EncyclopediaThemeMenuLink
+  menu_name: main
+  parent: devb_encyclopedia.encyclopedia_theme_overview

@@ -1,0 +1,415 @@
+# Migration configuration for organisations.
+id: nodegoat_organisation
+label: "NodeGoat encyclopedia items: Organisations"
+migration_group: devb_encyclopedia_nodegoat
+source:
+  urls:
+    - 'https://api.onderzoek.advn.be/project/254/data/type/959/filter/45/object'
+  fields:
+    - name: nodegoat_id
+      label: 'NodeGoat ID'
+      selector: 'object/object_id'
+    -
+      name: advn_id
+      label: 'ADVN ID'
+      selector: 'object_definitions/4084/object_definition_value'
+    -
+      name: subtype
+      label: 'Subtype'
+      selector: 'object_definitions/4026/object_definition_value'
+    -
+      name: name
+      label: 'Name'
+      selector: 'object/object_name'
+    -
+      name: abbreviation
+      label: 'Abbreviation'
+      selector: 'object_definitions/3727/object_definition_value'
+    -
+      name: department
+      label: 'Department'
+      selector: 'object_definitions/3726/object_definition_value'
+    -
+      name: other_names
+      label: 'Other names'
+      selector: 'object_definitions/3729/object_definition_value'
+    -
+      name: characteristic
+      label: 'Characteristic'
+      selector: 'object_definitions/4277/object_definition_value'
+    -
+      name: date_start
+      label: 'Start date'
+      selector: 'object_definitions/3865/object_definition_value'
+    -
+      name: date_end
+      label: 'End date'
+      selector: 'object_definitions/3866/object_definition_value'
+    -
+      name: successor_of
+      label: 'Successor of'
+      selector: 'object_definitions/3728/object_definition_value'
+    -
+      name: succeeded_by
+      label: 'Succeeded by'
+      selector: 'object_definitions/3807/object_definition_value'
+    -
+      name: summary
+      label: 'Summary'
+      selector: 'object_definitions/3730/object_definition_value'
+    -
+      name: lemma
+      label: 'Lemma'
+      selector: 'object_definitions/4117/object_definition_value'
+    -
+      name: lemma_introduction
+      label: 'Lemma - intro'
+      selector: 'object_definitions/4351/object_definition_value'
+    -
+      name: lemma_short_read
+      label: 'Lemma - short read'
+      selector: 'object_definitions/4352/object_definition_value'
+    -
+      name: lemma_bibliography_literature
+      label: 'Lemma - bibliography literature'
+      selector: 'object_definitions/4249/object_definition_value'
+    - name: lemma_bibliography_work
+      label: 'Lemma - bibliography work'
+      selector: 'object_definitions/4452/object_definition_value'
+    -
+      name: wikidata_id
+      label: 'Wikidata - ID'
+      selector: 'object_definitions/3736/object_definition_value'
+    -
+      name: viaf_id
+      label: 'VIAF - ID'
+      selector: 'object_definitions/3738/object_definition_value'
+    -
+      name: isni_id
+      label: 'ISNI - ID'
+      selector: 'object_definitions/3737/object_definition_value'
+    -
+      name: odis_id
+      label: 'ODIS - ID'
+      selector: 'object_definitions/3739/object_definition_value'
+    -
+      name: theme
+      label: 'Theme'
+      selector: 'object_definitions/4385/object_definition_value'
+  ids:
+    nodegoat_id:
+      type: string
+process:
+  field_name:
+    plugin: string_cleanup
+    source: name
+  title:
+    plugin: default_value
+    default_value: 'Stub'
+    source: '@field_name'
+  field_abbreviation: abbreviation
+  field_department: department
+  field_other_names:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: other_names
+    -
+      plugin: explode
+      delimiter: ', '
+    -
+      plugin: flatten
+    -
+      plugin: string_cleanup
+  field_characteristic: characteristic
+  field_date_start:
+    plugin: ymd_date
+    source: date_start
+  field_date_end:
+    plugin: ymd_date
+    source: date_end
+  field_successor_of:
+    plugin: string_cleanup
+    source: successor_of
+  field_succeeded_by:
+    plugin: string_cleanup
+    source: succeeded_by
+  'field_summary/value':
+    plugin: lemma_text
+    source: summary
+  'field_summary/format':
+    plugin: default_value
+    default_value: 'nodegoat_text'
+  'field_lemma/value':
+    plugin: lemma_text
+    source: lemma
+  'field_lemma/format':
+    plugin: default_value
+    default_value: 'nodegoat_text'
+  'field_lemma_introduction/value':
+    plugin: lemma_text
+    source: lemma_introduction
+  'field_lemma_introduction/format':
+    plugin: default_value
+    default_value: 'nodegoat_text'
+  'field_lemma_short_read/value':
+    plugin: lemma_text
+    source: lemma_short_read
+  'field_lemma_short_read/format':
+    plugin: default_value
+    default_value: 'nodegoat_text'
+  'field_lemma_bibliography_lit/value':
+    plugin: lemma_text
+    source: lemma_bibliography_literature
+  'field_lemma_bibliography_lit/format':
+    plugin: default_value
+    default_value: 'nodegoat_text'
+  'field_lemma_bibliography_work/value':
+    plugin: lemma_text
+    source: lemma_bibliography_work
+  'field_lemma_bibliography_work/format':
+    plugin: default_value
+    default_value: 'nodegoat_text'
+  'field_link_wikidata/uri':
+    -
+      plugin: skip_on_empty
+      method: process
+      source: wikidata_id
+    -
+      plugin: concat
+      source:
+        - constants/wikidata_url
+        - wikidata_id
+  'field_link_wikidata/title':
+    plugin: default_value
+    default_value: 'Wikidata'
+  'field_link_viaf/uri':
+    -
+      plugin: skip_on_empty
+      method: process
+      source: viaf_id
+    -
+      plugin: concat
+      source:
+        - constants/viaf_url
+        - viaf_id
+  'field_link_viaf/title':
+    plugin: default_value
+    default_value: 'VIAF'
+  'field_link_isni/uri':
+    -
+      plugin: skip_on_empty
+      method: process
+      source: isni_id
+    -
+      plugin: concat
+      source:
+        - constants/isni_url
+        - isni_id
+  'field_link_isni/title':
+    plugin: default_value
+    default_value: 'ISNI'
+  'field_link_odis/uri':
+    -
+      plugin: skip_on_empty
+      method: process
+      source: odis_id
+    -
+      plugin: concat
+      source:
+        - constants/odis_url
+        - odis_id
+  'field_link_odis/title':
+    plugin: default_value
+    default_value: 'ODIS'
+  'field_editorial_info':
+    plugin: sub_process
+    source: 'object_subs/1064'
+    process:
+      date:
+        plugin: editorial_date
+        source:
+          - 'object_sub/object_sub_date_start'
+          - 'object_sub/object_sub_date_end'
+      author: 'object_sub_definitions/1549/object_sub_definition_value'
+      operation: 'object_sub_definitions/1548/object_sub_definition_value'
+      link: 'object_sub_definitions/1653/object_sub_definition_value'
+      description: 'object_sub_definitions/1550/object_sub_definition_value'
+  'field_archives':
+    plugin: sub_process
+    source: 'object_subs/1106'
+    process:
+      repository: 'object_sub_definitions/1716/object_sub_definition_value'
+      inventory: 'object_sub_definitions/1717/object_sub_definition_value'
+      reference: 'object_sub_definitions/1982/object_sub_definition_value'
+  'field_images':
+    plugin: sub_process
+    source: 'object_subs/1091'
+    include_source: true
+    process:
+      'temp_image_url':
+        - plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/1649/object_sub_definition_value'
+        - plugin: concat
+          source:
+            - source/constants/devb_image_url
+            - 'object_sub_definitions/1649/object_sub_definition_value'
+        - plugin: file_extension_fix
+      target_id:
+        plugin: file_import
+        source: '@temp_image_url'
+        destination: constants/image_destination
+        uid: '@uid'
+        id_only: true
+        file_exists: 'replace'
+      alt:
+        -
+          plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/1650/object_sub_definition_value'
+        -
+          plugin: substr
+          start: 0
+          length: 512
+      title:
+        -
+          plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/1650/object_sub_definition_value'
+        -
+          plugin: substr
+          start: 0
+          length: 1024
+      copyright:
+        -
+          plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/1651/object_sub_definition_value'
+        -
+          plugin: substr
+          start: 0
+          length: 1024
+      orientation:
+        plugin: static_map
+        source: 'object_sub_definitions/1847/object_sub_definition_value'
+        map:
+          "0": 'landscape'
+          "1": 'portrait'
+        default_value: ''
+      main_image:
+        plugin: static_map
+        source: 'object_sub_definitions/1848/object_sub_definition_value'
+        map:
+          "0": FALSE
+          "1": TRUE
+        default_value: FALSE
+      order_text:
+        - plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/1652/object_sub_definition_value'
+        - plugin: callback
+          callable: intval
+      order_gallery:
+        - plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/1849/object_sub_definition_value'
+        - plugin: callback
+          callable: intval
+  field_theme:
+    plugin: entity_generate
+    source: theme
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: themes
+    value_key: name
+  'field_related_person':
+    plugin: sub_process
+    source: 'object_subs/1000'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_person
+        source: 'object_sub_definitions/1419/object_sub_definition_ref_object_id'
+      qualification: 'object_sub_definitions/1420/object_sub_definition_value'
+  'field_related_organisation':
+    plugin: sub_process
+    source: 'object_subs/1016'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_organisation
+        source: 'object_sub_definitions/1444/object_sub_definition_ref_object_id'
+      qualification: 'object_sub_definitions/1445/object_sub_definition_value'
+  'field_related_publication':
+    plugin: sub_process
+    source: 'object_subs/1017'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_publication
+        source: 'object_sub_definitions/1446/object_sub_definition_ref_object_id'
+      qualification: 'object_sub_definitions/1447/object_sub_definition_value'
+  'field_related_event':
+    plugin: sub_process
+    source: 'object_subs/1018'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_event
+        source: 'object_sub_definitions/1448/object_sub_definition_ref_object_id'
+      qualification: 'object_sub_definitions/1449/object_sub_definition_value'
+  'field_related_artwork':
+    plugin: sub_process
+    source: 'object_subs/1111'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_artwork
+        source: 'object_sub_definitions/1730/object_sub_definition_ref_object_id'
+      qualification: 'object_sub_definitions/1729/object_sub_definition_value'
+  'field_related_monument':
+    plugin: sub_process
+    source: 'object_subs/1019'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_monument
+        source: 'object_sub_definitions/1450/object_sub_definition_ref_object_id'
+      qualification: 'object_sub_definitions/1451/object_sub_definition_value'
+  'field_related_location':
+    plugin: sub_process
+    source: 'object_subs/1020'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_location
+        source: 'object_sub_definitions/1452/object_sub_definition_ref_object_id'
+  'field_related_region':
+    plugin: sub_process
+    source: 'object_subs/1020'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_region
+        source: 'object_sub_definitions/1734/object_sub_definition_ref_object_id'
+  'field_related_concept':
+    plugin: sub_process
+    source: 'object_subs/1020'
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: nodegoat_concept
+        source: 'object_sub_definitions/1733/object_sub_definition_ref_object_id'
+  'field_is_overview':
+    plugin: is_overview
+    source: lemma_short_read
+destination:
+  plugin: entity:node
+  default_bundle: 'encyclopedia_organisation'
+migration_dependencies:
+  required: []
+dependencies:
+  enforced:
+    module:
+      - devb_encyclopedia_migrate

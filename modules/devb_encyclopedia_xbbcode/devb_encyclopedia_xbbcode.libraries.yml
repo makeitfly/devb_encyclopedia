@@ -1,0 +1,13 @@
+hovercard:
+  version: 1.x
+  css:
+    theme:
+      assets/hovercard.css: {}
+  js:
+    assets/jquery.hovercard.min.js: {}
+    assets/hovercard.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
