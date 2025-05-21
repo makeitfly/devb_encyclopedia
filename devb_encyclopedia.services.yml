@@ -1,0 +1,17 @@
+services:
+  # Hooks.
+  Drupal\devb_encyclopedia\Hook\EntityHooks:
+    class: Drupal\devb_encyclopedia\Hook\EntityHooks
+    autowire: true
+  Drupal\devb_encyclopedia\Hook\ThemeHooks:
+    class: Drupal\devb_encyclopedia\Hook\ThemeHooks
+    autowire: true
+  # Other services.
+  devb_encyclopedia.breadcrumb:
+    class: Drupal\devb_encyclopedia\Breadcrumb\EncyclopediaBreadcrumbBuilder
+    arguments: ['@request_stack']
+    tags:
+      - { name: breadcrumb_builder, priority: 1050 }
+  devb_encyclopedia.reference_texts_generator:
+    class: Drupal\devb_encyclopedia\Service\ReferenceTextsGenerator
+    autowire: true

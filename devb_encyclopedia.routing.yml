@@ -1,0 +1,9 @@
+devb_encyclopedia.permalink:
+  path: '/id/{advn_id}'
+  defaults:
+    _controller: '\Drupal\devb_encyclopedia\Controller\EncyclopediaController::permalink'
+    _title: 'Permalink redirect'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'

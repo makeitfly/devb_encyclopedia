@@ -1,0 +1,7 @@
+name: DEVB Encyclopedia - XBBCode support
+type: module
+description: 'Provides additional XBBCode support for input coming from NodeGoat'
+package: DEVB
+core_version_requirement: ^9 || ^10
+dependencies:
+  - xbbcode:xbbcode

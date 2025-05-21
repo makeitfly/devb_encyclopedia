@@ -1,0 +1,13 @@
+services:
+  devb_encyclopedia_migrate.migrate_event_subscriber:
+    class: Drupal\devb_encyclopedia_migrate\EventSubscriber\MigrateEventSubscriber
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.devb_encyclopedia_migrate'
+      - '@email_factory'
+    tags:
+      - { name: 'event_subscriber' }
+  logger.channel.devb_encyclopedia_migrate:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: logger.factory:get
+    arguments: [ 'devb_encyclopedia_migrate' ]

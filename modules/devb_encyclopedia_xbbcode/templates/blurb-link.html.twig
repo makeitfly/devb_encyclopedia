@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Template integration for xbbcode blurb link.
+ */
+#}
+{% set text = blurb_content|render|striptags %}
+<span data-hover-label="label-{{ blurb_id }}">
+  <a href="{{ link_url }}">{{ link_title }}</a>
+</span>
+
+<span data-hover-blurb="blurb-{{ blurb_id }}" class="blurb">
+  <span>{{ blurb_title }}</span><br>
+  <span>
+    {{ text|length > 200 ? text|slice(0, 200)|raw ~ '...' : text|raw }}
+  </span>
+
+  <span>{{ 'Read more'|t }}</span>
+  <a href="{{ link_url }}"></a>
+</span>

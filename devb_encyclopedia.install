@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Installation file for DEVB encyclopedia.
+ */
+
+/**
+ * Add extra properties to field type encyclopedia_image.
+ */
+function devb_encyclopedia_update_9001(&$sandbox): void {
+  if (!\Drupal::hasService('entityone_tools.field_type_schema_change')) {
+    throw new Exception('This update hook can only run when the `entityone_tools.field_type_schema_change` service exists. Run updb again after clearing cache.');
+  }
+  /** @var \Drupal\entityone_tools\FieldTypeSchemaChange $field_type_schema_change */
+  $field_type_schema_change = \Drupal::service('entityone_tools.field_type_schema_change');
+  $field_type_schema_change->addColumn('encyclopedia_image', [
+    'orientation',
+    'main_image',
+    'order_text',
+    'order_gallery',
+  ]);
+}
+
+/**
+ * Add extra property to field type archive.
+ */
+function devb_encyclopedia_update_9002(&$sandbox): void {
+  if (!\Drupal::hasService('entityone_tools.field_type_schema_change')) {
+    throw new Exception('This update hook can only run when the `entityone_tools.field_type_schema_change` service exists. Run updb again after clearing cache.');
+  }
+  /** @var \Drupal\entityone_tools\FieldTypeSchemaChange $field_type_schema_change */
+  $field_type_schema_change = \Drupal::service('entityone_tools.field_type_schema_change');
+  $field_type_schema_change->addColumn('archive', [
+    'reference',
+  ]);
+}

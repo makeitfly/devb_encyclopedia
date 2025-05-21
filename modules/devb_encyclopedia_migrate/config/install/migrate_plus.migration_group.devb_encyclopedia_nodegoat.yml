@@ -1,0 +1,47 @@
+id: devb_encyclopedia_nodegoat
+label: DEVB Encyclopedia items migration from NodeGoat
+description: Migrations for DEVB Encyclopedia items from NodeGoat.
+source_type: REST API
+shared_configuration:
+  source:
+    constants:
+      wikidata_url: 'https://www.wikidata.org/wiki/'
+      viaf_url: 'https://viaf.org/viaf/'
+      isni_url: 'https://isni.org/isni/'
+      odis_url: 'https://www.odis.be/lnk/'
+      vp_url: 'https://www.vlaamsparlement.be/'
+      dbnl_url: 'https://www.dbnl.org/auteurs/auteur.php?id='
+      issn_url: 'https://portal.issn.org/resource/ISSN/'
+      abraham_url: 'https://anet.be/record/opacbnc/'
+      ioe_url: 'https://id.erfgoed.net/erfgoedobjecten/'
+      geonames_url: 'https://www.geonames.org/'
+      devb_image_url: 'https://beeld.devb.be/'
+      devb_file_url: 'https://tekst.devb.be/'
+      image_destination: 'public://encyclopedia_image'
+      title_addendum: ' & Vlaanderen'
+    track_changes: true
+    # Shared config for NodeGoat source.
+    plugin: nodegoat_url
+    data_fetcher_plugin: http
+    data_parser_plugin: json
+    include_raw_data: true
+    authentication:
+      plugin: nodegoat_oauth2
+    item_selector: 'data/objects'
+  process:
+    langcode:
+      plugin: default_value
+      default_value: "nl"
+    uid:
+      plugin: default_value
+      default_value: 1
+    status:
+      plugin: unpublish_on_empty
+      source: name
+    field_nodegoat_id: nodegoat_id
+    field_advn_id: advn_id
+    field_subtype: subtype
+dependencies:
+  enforced:
+    module:
+      - devb_encyclopedia_migrate

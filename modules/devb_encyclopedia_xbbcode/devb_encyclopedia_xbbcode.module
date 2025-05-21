@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Provides additional XBBCode support for input coming from NodeGoat.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function devb_encyclopedia_xbbcode_theme($existing, $type, $theme, $path) {
+  return [
+    'blurb_link' => [
+      'variables' => [
+        'blurb_id' => NULL,
+        'blurb_title' => NULL,
+        'link_url' => NULL,
+        'link_title' => NULL,
+        'blurb_content' => NULL,
+      ],
+    ],
+    'devb_inline_image' => [
+      'variables' => [
+        'image' => NULL,
+        'alt' => NULL,
+        'title' => NULL,
+        'url' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function devb_encyclopedia_xbbcode_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  $allowed_bundles = [
+    'encyclopedia_artwork',
+    'encyclopedia_concept',
+    'encyclopedia_event',
+    'encyclopedia_location',
+    'encyclopedia_monument',
+    'encyclopedia_organisation',
+    'encyclopedia_person',
+    'encyclopedia_publication',
+    'encyclopedia_region',
+    'encyclopedia_document',
+  ];
+
+  if (in_array($entity->bundle(), $allowed_bundles)) {
+    if ($view_mode === 'full') {
+      $build['#attached']['library'][] = 'devb_encyclopedia_xbbcode/hovercard';
+    }
+  }
+}
