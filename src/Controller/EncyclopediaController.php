@@ -22,6 +22,14 @@ class EncyclopediaController extends ControllerBase {
    *   The redirect response to the current object URL.
    */
   public function permalink(string $advn_id): RedirectResponse {
+    $node = $this->getEncyclopediaNodeByAdvnId($advn_id);
+    if ($node instanceof NodeInterface) {
+      return $this->redirect('entity.node.canonical', ['node' => $node->id()]);
+    }
+    throw new NotFoundHttpException();
+  }
+
+  protected function getEncyclopediaNodeByAdvnId(string $advn_id): ?NodeInterface {
     $node_storage = $this->entityTypeManager()->getStorage('node');
     $nids = $node_storage->getQuery()
       ->condition('status', 1)
@@ -33,10 +41,10 @@ class EncyclopediaController extends ControllerBase {
       $nid = reset($nids);
       $node = $node_storage->load($nid);
       if ($node instanceof NodeInterface) {
-        return $this->redirect('entity.node.canonical', ['node' => $node->id()]);
+        return $node;
       }
     }
-    throw new NotFoundHttpException();
+    return NULL;
   }
 
 }
