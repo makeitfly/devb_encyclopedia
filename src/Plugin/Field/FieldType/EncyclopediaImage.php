@@ -17,7 +17,7 @@ use Drupal\image\Plugin\Field\FieldType\ImageItem;
   id: "encyclopedia_image",
   label: new TranslatableMarkup("Encyclopedia image"),
   description: new TranslatableMarkup("References an encyclopedia record image"),
-  category: new TranslatableMarkup("DEVB Encyclopedia"),
+  category: 'devb_encyclopedia',
   default_widget: "encyclopedia_image_widget",
   default_formatter: "encyclopedia_image_formatter",
   list_class: FileFieldItemList::class,

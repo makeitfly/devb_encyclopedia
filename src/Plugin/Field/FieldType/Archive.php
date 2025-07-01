@@ -15,7 +15,7 @@ use Drupal\Core\TypedData\DataDefinition;
   id: "archive",
   label: new TranslatableMarkup("Archive"),
   description: new TranslatableMarkup("Archive details for an encyclopedia record"),
-  category: new TranslatableMarkup("DEVB Encyclopedia"),
+  category: 'devb_encyclopedia',
   default_widget: "archive_widget",
   default_formatter: "archive_formatter",
 )]

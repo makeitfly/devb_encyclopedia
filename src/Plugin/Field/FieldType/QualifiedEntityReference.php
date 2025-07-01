@@ -19,7 +19,7 @@ use Drupal\Core\TypedData\DataReferenceTargetDefinition;
   id: "qualified_entity_reference",
   label: new TranslatableMarkup("Qualified Entity Reference"),
   description: new TranslatableMarkup("Reference to an entity, with an additional relationship qualification."),
-  category: new TranslatableMarkup("Reference"),
+  category: 'devb_encyclopedia',
   default_widget: "qualified_entity_reference_autocomplete",
   default_formatter: "qualified_entity_reference_basic_formatter",
   list_class: EntityReferenceFieldItemList::class,

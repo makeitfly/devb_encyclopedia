@@ -1,0 +1,6 @@
+devb_encyclopedia:
+  label: 'DEVB Encyclopedia'
+  description: 'DEVB Encyclopedia-specific fields.'
+  weight: -15
+  libraries:
+    - options/drupal.options-icon

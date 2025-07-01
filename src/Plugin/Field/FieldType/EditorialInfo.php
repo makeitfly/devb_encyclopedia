@@ -16,7 +16,7 @@ use Drupal\Core\TypedData\DataDefinition;
   id: "editorial_info",
   label: new TranslatableMarkup("Editorial information"),
   description: new TranslatableMarkup("Editorial information regarding an encyclopedia record."),
-  category: new TranslatableMarkup("DEVB Encyclopedia"),
+  category: 'devb_encyclopedia',
   default_widget: "editorial_info_default",
   default_formatter: "editorial_info_basic_formatter",
 )]
