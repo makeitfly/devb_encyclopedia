@@ -55,7 +55,7 @@ class NodeGoatOAuth2 extends AuthenticationPluginBase implements ContainerFactor
   /**
    * {@inheritdoc}
    */
-  public function getAuthenticationOptions(): array {
+  public function getAuthenticationOptions($url): array {
     return [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->keyRepository->getKey('nodegoat_oauth2_access_token')?->getKeyValue(),
