@@ -15,4 +15,14 @@ interface EncyclopediaItemInterface {
    */
   public function getEncyclopediaTypeLabel(): string;
 
+  /**
+   * Get the main image file.
+   *
+   * @param string|null $image_style
+   *   The image style to render image as.
+   *
+   * @return string|null
+   */
+  public function getMainImage(?string $image_style = NULL): ?string;
+
 }

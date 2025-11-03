@@ -5,6 +5,7 @@ namespace Drupal\devb_encyclopedia_xbbcode\Plugin\XBBCode;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RendererInterface;
+use Drupal\devb_encyclopedia\Entity\EncyclopediaItemBase;
 use Drupal\devb_encyclopedia\NodeGoatMapping;
 use Drupal\node\NodeInterface;
 use Drupal\xbbcode\Parser\Tree\TagElementInterface;
@@ -84,7 +85,7 @@ class ObjectLink extends RenderTagPlugin implements ContainerFactoryPluginInterf
           // Find the Drupal node that is associated with the given Nodegoat
           // object record ID.
           $node = $this->getNodeByNodeGoatId($bundle, $nodegoat_id);
-          if ($node instanceof NodeInterface) {
+          if ($node instanceof EncyclopediaItemBase) {
             $build = [
               '#theme' => 'blurb_link',
               '#blurb_title' => $node->getTitle(),
@@ -96,7 +97,18 @@ class ObjectLink extends RenderTagPlugin implements ContainerFactoryPluginInterf
               ]),
               '#blurb_id' => $node->id(),
             ];
-            $content = $this->renderer->renderPlain($build);
+            if ($blurb_img = $node->getMainImage('square_small')) {
+              $build['#blurb_img'] = [
+                '#type' => 'inline_template',
+                '#template' => '<img src="{{ img_url }}" alt="{{ title }}" title="{{ title }}" />',
+                '#context' => [
+                  'img_url' => $blurb_img,
+                  'title' => $node->getTitle(),
+                ]
+              ];
+            }
+
+            $content = $this->renderer->renderInIsolation($build);
             $content = preg_replace("/\r|\n/", "", $content);
           }
         }

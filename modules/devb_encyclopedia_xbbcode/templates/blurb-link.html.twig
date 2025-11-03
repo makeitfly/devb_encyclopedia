@@ -11,6 +11,7 @@
 
 <span data-hover-blurb="blurb-{{ blurb_id }}" class="blurb">
   <span>{{ blurb_title }}</span><br>
+  <span class="img">{{ blurb_img }}</span>
   <span>
     {{ text|length > 200 ? text|slice(0, 200)|raw ~ '...' : text|raw }}
   </span>

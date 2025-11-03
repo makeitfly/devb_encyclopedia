@@ -20,6 +20,7 @@ function devb_encyclopedia_xbbcode_theme($existing, $type, $theme, $path) {
         'link_url' => NULL,
         'link_title' => NULL,
         'blurb_content' => NULL,
+        'blurb_img' => NULL,
       ],
     ],
     'devb_inline_image' => [
