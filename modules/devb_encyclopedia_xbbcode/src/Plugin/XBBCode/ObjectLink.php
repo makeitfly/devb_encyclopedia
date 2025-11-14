@@ -97,7 +97,7 @@ class ObjectLink extends RenderTagPlugin implements ContainerFactoryPluginInterf
               ]),
               '#blurb_id' => $node->id(),
             ];
-            if ($blurb_img = $node->getMainImage('square_small')) {
+            if ($blurb_img = $node->getMainImage('16_9_small')) {
               $build['#blurb_img'] = [
                 '#type' => 'inline_template',
                 '#template' => '<img src="{{ img_url }}" alt="{{ title }}" title="{{ title }}" />',
