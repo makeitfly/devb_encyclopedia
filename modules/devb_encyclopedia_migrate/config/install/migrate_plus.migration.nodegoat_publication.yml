@@ -114,6 +114,13 @@ process:
   field_title:
     plugin: string_cleanup
     source: name
+  field_translate:
+    plugin: static_map
+    source: 'object_sub_definitions/2035/object_sub_definition_value'
+    map:
+      "0": FALSE
+      "1": TRUE
+    default_value: FALSE
   title:
     plugin: default_value
     default_value: 'Stub'
