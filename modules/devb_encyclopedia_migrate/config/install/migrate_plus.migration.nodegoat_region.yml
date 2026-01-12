@@ -90,12 +90,19 @@ process:
       - '@_field_name'
       - '@_title_addendum'
   field_translate:
-    plugin: static_map
-    source: 'object_sub_definitions/2032/object_sub_definition_value'
-    map:
-      "0": FALSE
-      "1": TRUE
-    default_value: FALSE
+    plugin: sub_process
+    source: 'object_subs/1061'
+    process:
+      value:
+        - plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/2032/object_sub_definition_value'
+        - plugin: static_map
+          source: 'object_sub_definitions/2032/object_sub_definition_value'
+          map:
+            "0": FALSE
+            "1": TRUE
+          default_value: FALSE
   title:
     plugin: default_value
     default_value: 'Stub'
