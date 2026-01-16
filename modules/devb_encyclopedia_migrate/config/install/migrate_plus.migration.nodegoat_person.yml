@@ -318,6 +318,8 @@ process:
             "0": 0
             "1": 1
           default_value: 0
+      translated:
+        plugin: preserve_editorial_translated
   'field_archives':
     plugin: sub_process
     source: 'object_subs/1105'

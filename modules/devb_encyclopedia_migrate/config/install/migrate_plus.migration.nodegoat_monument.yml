@@ -220,6 +220,7 @@ process:
   'field_editorial_info':
     plugin: sub_process
     source: 'object_subs/1063'
+    include_source: true
     process:
       date:
         plugin: editorial_date
@@ -240,6 +241,8 @@ process:
             "0": 0
             "1": 1
           default_value: 0
+      translated:
+        plugin: preserve_editorial_translated
   'field_images':
     plugin: sub_process
     source: 'object_subs/1099'

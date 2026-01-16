@@ -87,10 +87,10 @@ class EditorialInfo extends FieldItemBase {
     $properties['description'] = DataDefinition::create('string')
       ->setLabel(t('Description of the editorial change.'))
       ->setRequired(FALSE);
-    $properties['can_be_translated'] = DataDefinition::create('boolean')
+    $properties['can_be_translated'] = DataDefinition::create('integer')
       ->setLabel(t('Whether the content can be translated.'))
       ->setRequired(FALSE);
-    $properties['translated'] = DataDefinition::create('boolean')
+    $properties['translated'] = DataDefinition::create('integer')
       ->setLabel(t('Whether the content has been translated.'))
       ->setRequired(FALSE);
     return $properties;
