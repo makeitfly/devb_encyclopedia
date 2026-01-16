@@ -103,20 +103,6 @@ process:
   field_name:
     plugin: string_cleanup
     source: name
-  field_translate:
-    plugin: sub_process
-    source: 'object_subs/1064'
-    process:
-      value:
-        - plugin: skip_on_empty
-          method: process
-          source: 'object_sub_definitions/2023/object_sub_definition_value'
-        - plugin: static_map
-          source: 'object_sub_definitions/2023/object_sub_definition_value'
-          map:
-            "0": FALSE
-            "1": TRUE
-          default_value: FALSE
   title:
     plugin: default_value
     default_value: 'Stub'
@@ -249,6 +235,16 @@ process:
       operation: 'object_sub_definitions/1548/object_sub_definition_value'
       link: 'object_sub_definitions/1653/object_sub_definition_value'
       description: 'object_sub_definitions/1550/object_sub_definition_value'
+      can_be_translated:
+        - plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/2023/object_sub_definition_value'
+        - plugin: static_map
+          source: 'object_sub_definitions/2023/object_sub_definition_value'
+          map:
+            "0": 0
+            "1": 1
+          default_value: 0
   'field_archives':
     plugin: sub_process
     source: 'object_subs/1106'

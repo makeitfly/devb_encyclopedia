@@ -124,20 +124,6 @@ process:
   field_name:
     plugin: string_cleanup
     source: last_name
-  field_translate:
-    plugin: sub_process
-    source: 'object_subs/998'
-    process:
-      value:
-        - plugin: skip_on_empty
-          method: process
-          source: 'object_sub_definitions/2026/object_sub_definition_value'
-        - plugin: static_map
-          source: 'object_sub_definitions/2026/object_sub_definition_value'
-          map:
-            "0": FALSE
-            "1": TRUE
-          default_value: FALSE
   field_first_name:
     plugin: string_cleanup
     source: first_name
@@ -322,6 +308,16 @@ process:
       operation: 'object_sub_definitions/1415/object_sub_definition_value'
       link: 'object_sub_definitions/1644/object_sub_definition_value'
       description: 'object_sub_definitions/1417/object_sub_definition_value'
+      can_be_translated:
+        - plugin: skip_on_empty
+          method: process
+          source: 'object_sub_definitions/2026/object_sub_definition_value'
+        - plugin: static_map
+          source: 'object_sub_definitions/2026/object_sub_definition_value'
+          map:
+            "0": 0
+            "1": 1
+          default_value: 0
   'field_archives':
     plugin: sub_process
     source: 'object_subs/1105'

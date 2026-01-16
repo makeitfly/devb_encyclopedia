@@ -64,6 +64,13 @@ class EditorialInfoDefaultWidget extends WidgetBase {
       '#required' => FALSE,
     ];
 
+    $element['translated'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Translated'),
+      '#default_value' => $items[$delta]->translated ?: 0,
+      '#required' => FALSE,
+    ];
+
     return $element;
   }
 

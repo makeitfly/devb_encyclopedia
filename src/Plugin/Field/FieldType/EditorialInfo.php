@@ -48,6 +48,16 @@ class EditorialInfo extends FieldItemBase {
           'type' => 'text',
           'size' => 'big',
         ],
+        'can_be_translated' => [
+          'type' => 'int',
+          'size' => 'tiny',
+          'default' => 0,
+        ],
+        'translated' => [
+          'type' => 'int',
+          'size' => 'tiny',
+          'default' => 0,
+        ],
       ],
       'indexes' => [
         'date' => [
@@ -76,6 +86,12 @@ class EditorialInfo extends FieldItemBase {
       ->setRequired(FALSE);
     $properties['description'] = DataDefinition::create('string')
       ->setLabel(t('Description of the editorial change.'))
+      ->setRequired(FALSE);
+    $properties['can_be_translated'] = DataDefinition::create('boolean')
+      ->setLabel(t('Whether the content can be translated.'))
+      ->setRequired(FALSE);
+    $properties['translated'] = DataDefinition::create('boolean')
+      ->setLabel(t('Whether the content has been translated.'))
       ->setRequired(FALSE);
     return $properties;
   }
@@ -179,6 +195,36 @@ class EditorialInfo extends FieldItemBase {
       return $this->get('description')->getValue();
     }
     catch (\Exception $ex) {
+    }
+  }
+
+  /**
+   * Get whether the content can be translated.
+   *
+   * @return bool
+   *   TRUE if the content can be translated, FALSE otherwise.
+   */
+  public function canBeTranslated(): bool {
+    try {
+      return (bool) $this->get('can_be_translated')->getValue();
+    }
+    catch (\Exception $ex) {
+      return FALSE;
+    }
+  }
+
+  /**
+   * Get whether the content has been translated.
+   *
+   * @return bool
+   *   TRUE if the content has been translated, FALSE otherwise.
+   */
+  public function isTranslated(): bool {
+    try {
+      return (bool) $this->get('translated')->getValue();
+    }
+    catch (\Exception $ex) {
+      return FALSE;
     }
   }
 

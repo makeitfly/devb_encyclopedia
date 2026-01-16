@@ -35,3 +35,19 @@ function devb_encyclopedia_update_9002(&$sandbox): void {
     'reference',
   ]);
 }
+
+/**
+ * Add 'can_be_translated' and 'translated' properties to field type editorial_info.
+ */
+function devb_encyclopedia_update_10001(&$sandbox): void {
+  if (!\Drupal::hasService('entityone_tools.field_type_schema_change')) {
+    throw new Exception('This update hook can only run when the `entityone_tools.field_type_schema_change` service exists. Run updb again after clearing cache.');
+  }
+  /** @var \Drupal\entityone_tools\FieldTypeSchemaChange $field_type_schema_change */
+  $field_type_schema_change = \Drupal::service('entityone_tools.field_type_schema_change');
+  $field_type_schema_change->addColumn('editorial_info', [
+    'can_be_translated',
+    'translated',
+  ]);
+}
+
