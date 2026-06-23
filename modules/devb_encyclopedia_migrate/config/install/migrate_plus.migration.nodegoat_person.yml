@@ -117,6 +117,10 @@ source:
       name: theme
       label: 'Theme'
       selector: 'object_definitions/4360/object_definition_value'
+    -
+      name: belgium_wwii
+      label: 'Belgium WWII'
+      selector: 'object_definitions/4816/object_definition_value'
   ids:
     nodegoat_id:
       type: string
@@ -216,6 +220,19 @@ process:
   'field_lemma_bibliography_work/format':
     plugin: default_value
     default_value: 'nodegoat_text'
+  'field_belgium_wwii/uri':
+    -
+      plugin: skip_on_empty
+      method: process
+      source: belgium_wwii
+    -
+      plugin: concat
+      source:
+        - constants/devb_file_url
+        - belgium_wwii
+  'field_belgium_wwii/title':
+    plugin: default_value
+    default_value: 'Belgium WWII'
   'field_link_wikidata/uri':
     -
       plugin: skip_on_empty

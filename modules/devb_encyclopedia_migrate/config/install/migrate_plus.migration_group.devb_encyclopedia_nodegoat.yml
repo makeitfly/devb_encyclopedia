@@ -19,6 +19,7 @@ shared_configuration:
       devb_file_url: 'https://tekst.devb.be/'
       image_destination: 'public://encyclopedia_image'
       title_addendum: ' & Vlaanderen'
+      belgiumwwii_url: 'https://www.belgiumwwii.be/nl/belgie-in-oorlog/'
     track_changes: true
     # Shared config for NodeGoat source.
     plugin: nodegoat_url
