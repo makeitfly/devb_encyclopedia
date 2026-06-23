@@ -165,7 +165,7 @@ process:
     -
       plugin: concat
       source:
-        - constants/devb_file_url
+        - constants/belgiumwwii_url
         - belgium_wwii
   'field_belgium_wwii/title':
     plugin: default_value
