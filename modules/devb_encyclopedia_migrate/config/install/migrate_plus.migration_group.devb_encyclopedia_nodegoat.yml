@@ -12,7 +12,7 @@ shared_configuration:
       vp_url: 'https://www.vlaamsparlement.be/'
       dbnl_url: 'https://www.dbnl.org/auteurs/auteur.php?id='
       issn_url: 'https://portal.issn.org/resource/ISSN/'
-      abraham_url: 'https://anet.be/record/opacbnc/'
+      abraham_url: 'https://go.wander.be/record/opacbnc/'
       ioe_url: 'https://id.erfgoed.net/erfgoedobjecten/'
       geonames_url: 'https://www.geonames.org/'
       devb_image_url: 'https://beeld.devb.be/'
