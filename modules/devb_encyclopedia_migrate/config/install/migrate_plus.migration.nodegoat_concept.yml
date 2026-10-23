@@ -4,7 +4,7 @@ label: "NodeGoat encyclopedia items: Concepts"
 migration_group: devb_encyclopedia_nodegoat
 source:
   urls:
-    - 'https://api.onderzoek.advn.be/project/254/data/type/987/filter/52/object'
+    - 'https://api.onderzoek.advn.be/project/254/data/type/987/filter/52/object?limit=0'
   fields:
     -
       name: nodegoat_id

@@ -4,7 +4,7 @@ label: "NodeGoat encyclopedia items: Persons"
 migration_group: devb_encyclopedia_nodegoat
 source:
   urls:
-    - 'https://api.onderzoek.advn.be/project/254/data/type/953/filter/42/object'
+    - 'https://api.onderzoek.advn.be/project/254/data/type/953/filter/42/object?limit=0'
   fields:
     -
       name: nodegoat_id

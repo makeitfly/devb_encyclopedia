@@ -4,7 +4,7 @@ label: "NodeGoat encyclopedia items: Publications"
 migration_group: devb_encyclopedia_nodegoat
 source:
   urls:
-    - 'https://api.onderzoek.advn.be/project/254/data/type/962/filter/44/object'
+    - 'https://api.onderzoek.advn.be/project/254/data/type/962/filter/44/object?limit=0'
   fields:
     - name: nodegoat_id
       label: 'NodeGoat ID'

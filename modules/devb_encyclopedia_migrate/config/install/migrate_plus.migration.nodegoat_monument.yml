@@ -4,7 +4,7 @@ label: "NodeGoat encyclopedia items: Monuments"
 migration_group: devb_encyclopedia_nodegoat
 source:
   urls:
-    - 'https://api.onderzoek.advn.be/project/254/data/type/967/filter/46/object'
+    - 'https://api.onderzoek.advn.be/project/254/data/type/967/filter/46/object?limit=0'
   fields:
     -
       name: nodegoat_id
